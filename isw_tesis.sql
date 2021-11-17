@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2021 a las 08:09:57
+-- Tiempo de generación: 17-11-2021 a las 08:59:09
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
@@ -59,6 +59,13 @@ CREATE TABLE `tesis` (
   `profe2` int(15) NOT NULL,
   `link` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tesis`
+--
+
+INSERT INTO `tesis` (`boleta1`, `boleta2`, `boleta3`, `boleta4`, `profe1`, `profe2`, `link`) VALUES
+(2019630425, 2019630444, 0, 0, 777, 0, 'http://localhost/niws/tesis/protocolo SIGA-club.pdf');
 
 --
 -- Índices para tablas volcadas
