@@ -35,10 +35,10 @@
     </header>
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
-            <div> <a href="./index.php" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Inicio</span> </a>
+            <div> <a href="./index.php" class="nav_logo"> <i class='bx bx-home nav_logo-icon'></i> <span class="nav_logo-name">Inicio</span> </a>
                 <div class="nav_list"> 
-                    <a href="#" class="nav_link"> <i class='bx bx-upload'></i> <span class="nav_name">Sube Tesis</span> </a> 
-                    <a href="#" class="nav_link"> <i class='bx bx-search-alt'></i> <span class="nav_name">Buscar Tesis</span> </a> 
+                    <a href="./subirtesis.php" class="nav_link"> <i class='bx bx-upload'></i> <span class="nav_name">Sube Tesis</span> </a> 
+                    <a href="./buscador.php" class="nav_link"> <i class='bx bx-search-alt'></i> <span class="nav_name">Buscar Tesis</span> </a> 
                     <a href="#" class="nav_link"> <i class='bx bxs-book'></i> <span class="nav_name">Ve tus Tesis</span> </a> 
                     <a href="#" class="nav_link"> <i class='bx bxs-time'></i> <span class="nav_name">Ultimas Tesis</span> </a> 
             </div> <a href="./cerrarSesion.php?nombreSesion=email" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Cerrar sesión</span> </a>
@@ -56,7 +56,7 @@
             En este repositorio podrás encontrar todas las tesis que se han publicado en la universidad.
             Este proyecto está enfocado a la búsqueda de tesis de la carrera de Ingeniería en Sistemas Computacionales.
             </p>
-            <button class="btn btn-primary btn-lg btn-block" type="button">Sube tu tesis</button>
+            <a href="./subirtesis.php" class="btn btn-primary btn-lg btn-block">Subir tesis</a>
         </div>
         <div class="col-md-6"> 
             <img src="../assets/img/img.png" width="500" class="img-rounded">
@@ -102,9 +102,9 @@
         </div>
         </div>
 
-            <footer class="pt-3 mt-4 text-muted border-top">
-            &copy; 2021
-            </footer>
+        <footer class="pt-3 mt-4 text-muted border-top">
+            &copy; G5-Corporation S.A. de C.V. <?php echo date("Y"); ?>
+        </footer>
         </div>
     </div>
     

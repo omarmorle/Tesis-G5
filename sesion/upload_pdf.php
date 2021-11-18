@@ -17,6 +17,8 @@
 
 //recibir parametros del formulario de subir tesis y guardarlos en variables
 $titulo = $_POST['titulo'];
+$titulo = strtoupper($titulo);
+$anio = $_POST['anio'];
 $escuela = $_POST['escuela'];
 $numeroBoleta1 = $_POST['numeroBoleta1'];
 $numeroBoleta2 = $_POST['numeroBoleta2'];
@@ -28,6 +30,9 @@ $numeroEmpleado2 = $_POST['numeroEmpleado2'];
 //get the name of pdf file
 $pdf_name = $_FILES['documento']['name'];
 
+//change spaces to underscores
+$pdf_name_new = str_replace(' ', '-', $pdf_name);
+
 //print the name of pdf file
 echo $pdf_name;
 
@@ -36,10 +41,10 @@ if(isset($_FILES['documento']) && $_FILES['documento']['type']=='application/pdf
 }
 
 //obtener la direccion actual
-$url = "http://".$_SERVER['HTTP_HOST']."/niws/tesis/".$pdf_name;
+$url = "http://".$_SERVER['HTTP_HOST']."/niws/tesis/".$pdf_name_new;
 
 //insertar en la tabla tesis
-$consulta = "INSERT INTO tesis(boleta1, boleta2, boleta3, boleta4, profe1, profe2, link) VALUES ('$numeroBoleta1', '$numeroBoleta2', '$numeroBoleta3', '$numeroBoleta4', '$numeroEmpleado1', '$numeroEmpleado2', '$url')";
+$consulta = "INSERT INTO tesis(nombre, escuela, anio, boleta1, boleta2, boleta3, boleta4, profe1, profe2, link) VALUES ('$titulo', '$escuela', '$anio', '$numeroBoleta1', '$numeroBoleta2', '$numeroBoleta3', '$numeroBoleta4', '$numeroEmpleado1', '$numeroEmpleado2', '$url')";
 $resultado = mysqli_query($conex,$consulta);
 if ($resultado) {
     ?> 
@@ -47,6 +52,8 @@ if ($resultado) {
         window.location.href = "./index.php";
     </script>
     <?php
+    //renombrar el archivo subido
+    rename('../tesis/'.$pdf_name, '../tesis/'.$pdf_name_new);
 } else {
     ?> 
     echo'<script languaje="javascript">alert("Mori");</script>';
@@ -55,7 +62,7 @@ if ($resultado) {
 }
 
 //mandar alerta de que se subio correctamente la teesis con el titulo $titulo
-echo "<script>alert('Se subio correctamente la tesis con el nombre $url');</script>";
+echo "<script>alert('Se subio correctamente la tesis con el nombre $pdf_name');</script>";
 
 //redireccionar a la pagina de inicio
 echo '<script>window.location.href="./index.php";</script>';

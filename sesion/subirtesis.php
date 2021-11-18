@@ -36,10 +36,10 @@
     </header>
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
-            <div> <a href="./index.php" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Inicio</span> </a>
+            <div> <a href="./index.php" class="nav_logo"> <i class='bx bx-home nav_logo-icon'></i> <span class="nav_logo-name">Inicio</span> </a>
                 <div class="nav_list"> 
                     <a href="./subirtesis.php" class="nav_link"> <i class='bx bx-upload'></i> <span class="nav_name">Sube Tesis</span> </a> 
-                    <a href="#" class="nav_link"> <i class='bx bx-search-alt'></i> <span class="nav_name">Buscar Tesis</span> </a> 
+                    <a href="./buscador.php" class="nav_link"> <i class='bx bx-search-alt'></i> <span class="nav_name">Buscar Tesis</span> </a> 
                     <a href="#" class="nav_link"> <i class='bx bxs-book'></i> <span class="nav_name">Ve tus Tesis</span> </a> 
                     <a href="#" class="nav_link"> <i class='bx bxs-time'></i> <span class="nav_name">Ultimas Tesis</span> </a> 
             </div> <a href="./cerrarSesion.php?nombreSesion=email" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Cerrar sesión</span> </a>
@@ -53,6 +53,9 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
+                  <label class="control-label"><b>Llena todos los campos necesarios de acuerdo a tu tesis. 
+                                                En caso de solo necesitar los mínimos, dejar en blanco el resto</b></label>
+                  <br><br>
                   <label class="control-label">Titulo de tesis</label>
                   <input type="text" class="form-control" name="titulo" placeholder="Titulo de tesis" required>
                   <label class="control-label">Escuela de procedencia</label>
@@ -85,7 +88,7 @@
                 <i class="glyphicon glyphicon-download-alt"></i>
                 <p>Elige o arrastra tu tesis dentro del recuadro (Archivo PDF).</p>
               </div>
-              <input type="file" name="img_logo" class="dropzone">
+              <input type="file" name="documento" class="dropzone">
             </div>
           </div>
         </div>
@@ -99,6 +102,9 @@
           </div>
         </form>
       </section>
+      <footer class="pt-3 mt-4 text-muted border-top">
+            &copy; G5-Corporation S.A. de C.V. <?php echo date("Y"); ?>
+</footer>
     
     <!--Container Main end-->
     
