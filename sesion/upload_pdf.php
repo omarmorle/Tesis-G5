@@ -17,15 +17,22 @@
 
 //recibir parametros del formulario de subir tesis y guardarlos en variables
 $titulo = $_POST['titulo'];
-$titulo = strtoupper($titulo);
 $anio = $_POST['anio'];
 $escuela = $_POST['escuela'];
+$anio = $_POST['anio'];
 $numeroBoleta1 = $_POST['numeroBoleta1'];
 $numeroBoleta2 = $_POST['numeroBoleta2'];
 $numeroBoleta3 = $_POST['numeroBoleta3'];
 $numeroBoleta4 = $_POST['numeroBoleta4'];
-$numeroEmpleado1 = $_POST['numeroEmpleado1'];
-$numeroEmpleado2 = $_POST['numeroEmpleado2'];
+$prof1 = $_POST['prof1'];
+$prof2 = $_POST['prof2'];
+
+$uno = 1;
+
+//Pasar a mayusculas los nombres de los profesores y el titulo de la tesis
+$prof1 = strtoupper($prof1);
+$prof2 = strtoupper($prof2);
+$titulo = strtoupper($titulo);
 
 //get the name of pdf file
 $pdf_name = $_FILES['documento']['name'];
@@ -44,14 +51,9 @@ if(isset($_FILES['documento']) && $_FILES['documento']['type']=='application/pdf
 $url = "http://".$_SERVER['HTTP_HOST']."/niws/tesis/".$pdf_name_new;
 
 //insertar en la tabla tesis
-$consulta = "INSERT INTO tesis(nombre, escuela, anio, boleta1, boleta2, boleta3, boleta4, profe1, profe2, link) VALUES ('$titulo', '$escuela', '$anio', '$numeroBoleta1', '$numeroBoleta2', '$numeroBoleta3', '$numeroBoleta4', '$numeroEmpleado1', '$numeroEmpleado2', '$url')";
+$consulta = "INSERT INTO tesis(nombre, escuela, anio, boleta1, boleta2, boleta3, boleta4, profe1, profe2, link) VALUES ('$titulo', '$escuela', '$anio', '$numeroBoleta1', '$numeroBoleta2', '$numeroBoleta3', '$numeroBoleta4', '$prof1', '$prof2', '$url')";
 $resultado = mysqli_query($conex,$consulta);
 if ($resultado) {
-    ?> 
-    <script type="text/javascript">
-        window.location.href = "./index.php";
-    </script>
-    <?php
     //renombrar el archivo subido
     rename('../tesis/'.$pdf_name, '../tesis/'.$pdf_name_new);
 } else {
@@ -59,6 +61,39 @@ if ($resultado) {
     echo'<script languaje="javascript">alert("Mori");</script>';
     <h3 class="bad">¡Ups ha ocurrido un error!</h3>
     <?php
+}
+
+//Consultar si existe el profesor en la tabla profestesis
+$consulta = "SELECT * FROM profestesis WHERE nombre = '$prof1'";
+$resul = mysqli_query($conex, $consulta);
+$filas = mysqli_fetch_row($resul);
+//si no existe, insertarlo
+if ($filas == 0) {
+    $consulta = "INSERT INTO profestesis(nombre, numtesis) VALUES ('$prof1', '$uno')";
+    $resultado = mysqli_query($conex,$consulta);
+}
+else if($filas != 0) {
+    //si existe, actualizar el numero de tesis
+    $consulta = "UPDATE profestesis SET numtesis = numtesis + 1 WHERE nombre = '$prof1'";
+    $resultado = mysqli_query($conex,$consulta);
+}
+
+//Consultar si la variable prof2 no esta vacia
+if ($prof2 != "") {
+    //Consultar si existe el profesor en la tabla profestesis
+    $consulta = "SELECT * FROM profestesis WHERE nombre = '$prof2'";
+    $resul = mysqli_query($conex, $consulta);
+    $filas = mysqli_fetch_row($resul);
+    //si no existe, insertarlo
+    if ($filas == 0) {
+        $consulta = "INSERT INTO profestesis(nombre, numtesis) VALUES ('$prof2', '$uno')";
+        $resultado = mysqli_query($conex,$consulta);
+    }
+    else if($filas != 0) {
+        //si existe, actualizar el numero de tesis
+        $consulta = "UPDATE profestesis SET numtesis = numtesis + 1 WHERE nombre = '$prof2'";
+        $resultado = mysqli_query($conex,$consulta);
+    }
 }
 
 //mandar alerta de que se subio correctamente la teesis con el titulo $titulo

@@ -94,20 +94,38 @@ if(!empty($_POST))
       //$query ="SELECT * FROM tesis WHERE nombre like '%" . $aKeyword[0] . "%' OR anio like '%" . $aKeyword[0] . "%'";
 
       $query ="SELECT * FROM tesis WHERE nombre like '%".$aKeyword[0]."%' OR anio LIKE '%".$aKeyword[0]."%'";
+      $query1 ="SELECT * FROM profestesis WHERE nombre like '%".$aKeyword[0]."%'";
       
      for($i = 1; $i < count($aKeyword); $i++) {
         if(!empty($aKeyword[$i])) {
             $query .= "SELECT * FROM tesis WHERE nombre LIKE '%".$aKeyword[$i]."%' OR anio LIKE '%".$aKeyword[0]."%'";
+            $query1 ="SELECT * FROM profestesis WHERE nombre like '%".$aKeyword[$i]."%'";
         }
       }
      
      $result = $conex->query($query);
+     $result1 = $conex->query($query1);
      //$result = mysqli_query($conex,$query);
      echo "<br>Criterio de busqueda:<b> ". $_POST['PalabraClave']."</b>";
+
+     if($result1->num_rows == 1)
+     {
+        $row1 = $result1->fetch_assoc();
+        $num_tesis = $row1['numtesis'];
+        if($num_tesis >= 5)
+        {
+          $query ="SELECT * FROM tesis WHERE profe1 LIKE '%".$aKeyword[0]."%' OR profe2 LIKE '%".$aKeyword[0]."%'";
+          for($i = 1; $i < count($aKeyword); $i++) {
+            if(!empty($aKeyword[$i])) {
+              $query ="SELECT * FROM tesis WHERE profe1 LIKE '%".$aKeyword[$i]."%' OR profe2 LIKE '%".$aKeyword[$i]."%'";
+            }
+          }
+          $result = $conex->query($query);
+        }
+     }
      
      //saber el numero de filas
-     
-     if($result->num_rows > 0) {
+    if($result->num_rows > 0) {
         $row_count=0;
         echo "<br><br>Resultados encontrados: ";
         echo "<br><table class='table table-striped'>";
@@ -116,10 +134,11 @@ if(!empty($_POST))
           <td>Numero de coincidencias</td>
           <td>Nombre</td>
           <td>Año</td>
+          <td>Director (es)</td>
           <td>Descarga</td>
         </tr>
         <?php
-        //echo "<tr><td><p>Numero coincidencias</p></td><td><p>Nombre</p></td> <td><p>Descarga</p></td></tr>";
+        
         While($row = $result->fetch_assoc()) {   
             $row_count++;
             $descarga = $row['link'];   
@@ -128,10 +147,10 @@ if(!empty($_POST))
               <td><?php echo $row_count; ?></td>
               <td><?php echo $row['nombre']; ?></td>
               <td><?php echo $row['anio']; ?></td>
+              <td><?php echo $row['profe1']; ?> <br> <?php echo  $row['profe2']; ?></td>
               <td><a href="<?php echo $descarga; ?>" target="_blank"><img src='../assets/img/pdfdown.png' width="75px"></a></td>
             </tr>
             <?php
-            //echo "<tr><td>".$row_count." </td><td>". $row['nombre'] . "</td><td><a href='www.google.com'><img src='../assets/img/pdfdown.png'></a></td></tr>";
         }
         echo "</table>";
 	

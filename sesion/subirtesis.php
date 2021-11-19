@@ -60,18 +60,20 @@
                   <input type="text" class="form-control" name="titulo" placeholder="Titulo de tesis" required>
                   <label class="control-label">Escuela de procedencia</label>
                   <input type="text" class="form-control" name="escuela" placeholder="Escuela de procedencia" required>
+                  <label class="control-label">Año de realización</label>
+                  <input type="text" class="form-control" name="anio" placeholder="Año de realización" required>
                   <label class="control-label">Numero de boleta 1</label>
-                  <input type="text" class="form-control" name="numeroBoleta1" placeholder="Ingresa tu numero de boleta" required>
+                  <input type="text" class="form-control" name="numeroBoleta1" placeholder="Ingresa el numero de boleta" required>
                   <label class="control-label">Numero de boleta 2</label>
-                  <input type="text" class="form-control" name="numeroBoleta2" placeholder="Ingresa tu numero de boleta" >
+                  <input type="text" class="form-control" name="numeroBoleta2" placeholder="Ingresa el numero de boleta" >
                   <label class="control-label">Numero de boleta 3</label>
-                  <input type="text" class="form-control" name="numeroBoleta3" placeholder="Ingresa tu numero de boleta" >
+                  <input type="text" class="form-control" name="numeroBoleta3" placeholder="Ingresa el numero de boleta" >
                   <label class="control-label">Numero de boleta 4</label>
-                  <input type="text" class="form-control" name="numeroBoleta4" placeholder="Ingresa tu numero de boleta" >
-                  <label class="control-label">Numero de empleado del director 1</label>
-                  <input type="text" class="form-control" name="numeroEmpleado1" placeholder="Ingresa tu numero de empleado" required>
-                  <label class="control-label">Numero de empleado del director 2</label>
-                  <input type="text" class="form-control" name="numeroEmpleado2" placeholder="Ingresa tu numero de empleado" >
+                  <input type="text" class="form-control" name="numeroBoleta4" placeholder="Ingresa el numero de boleta" >
+                  <label class="control-label">Nombre completo del director 1</label>
+                  <input type="text" class="form-control" name="prof1" placeholder="Ingresa el nombre completo" required>
+                  <label class="control-label">Nombre completo del director 2</label>
+                  <input type="text" class="form-control" name="prof2" placeholder="Ingresa el nombre completo" >
                   <br>
                   <div class="preview-zone hidden">
               <div class="box box-solid">

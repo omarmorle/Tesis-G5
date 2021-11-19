@@ -1,17 +1,25 @@
 <?php
-  session_start();
-  if(isset($_SESSION["email"]))
-  {
-    $email = $_SESSION["email"];
-    include("../con_db.php");
-    $consulta = "SELECT * FROM persona WHERE email = '$email'";
+    session_start();
+    if(isset($_SESSION["email"]))
+    {
+        $email = $_SESSION["email"];
+        include("../con_db.php");
+        $consulta = "SELECT * FROM persona WHERE email = '$email'";
+        $resul = mysqli_query($conex, $consulta);
+        $filas = mysqli_fetch_row($resul);
+    }
+    else
+    {
+        header("location:./../login.php");
+    }
+
+    //hacer Select *from tesis;
+    $consulta = "SELECT * FROM tesis";
     $resul = mysqli_query($conex, $consulta);
-    $filas = mysqli_fetch_row($resul);
-  }
-  else
-  {
-    header("location:./../login.php");
-  }
+    //Guardar en un array todos los datos de la tabla tesis
+    $filas = mysqli_fetch_all($resul, MYSQLI_ASSOC);
+    //Cantidad de filas
+    $cantidad = mysqli_num_rows($resul);
 
 ?>
 
@@ -68,27 +76,42 @@
             <div class="h-100 p-5 text-white bg-dark rounded-3">
             <img src="../assets/img/tesislogo.jpg" width="200" class="img-rounded">
             <p>
-                Titulo de tesis 1.
+                <?php
+                    echo $filas[$cantidad-1]["nombre"];
+                ?>
             </p>
-            <button class="btn btn-outline-light" type="button">Léela</button>
+            <?php
+                //Boton que redirecciona a la pagina de la tesis
+                echo "<a href='".$filas[$cantidad-1]["link"]."' class='btn btn-outline-secondary' type='button'>Léela</a>";
+            ?>
             </div>
         </div>
         <div class="col-md-3">
             <div class="h-100 p-5 bg-light border rounded-3">
             <img src="../assets/img/tesislogo.jpg" width="200" class="img-rounded">
             <p>
-                Titulo de tesis 2.
+                <?php
+                    echo $filas[$cantidad-2]["nombre"];
+                ?>
             </p>
-            <button class="btn btn-outline-secondary" type="button">Léela</button>
+            <?php
+                //Boton que redirecciona a la pagina de la tesis
+                echo "<a href='".$filas[$cantidad-2]["link"]."' class='btn btn-outline-secondary' type='button'>Léela</a>";
+            ?>
             </div>
         </div>
         <div class="col-md-3">
             <div class="h-100 p-5 text-white bg-dark rounded-3">
             <img src="../assets/img/tesislogo.jpg" width="200" class="img-rounded">
             <p>
-                Titulo de tesis 3.
+                <?php
+                    echo $filas[$cantidad-3]["nombre"];
+                ?>
             </p>
-            <button class="btn btn-outline-light" type="button">Léela</button>
+            <?php
+                //Boton que redirecciona a la pagina de la tesis
+                echo "<a href='".$filas[$cantidad-3]["link"]."' class='btn btn-outline-secondary' type='button'>Léela</a>";
+            ?>
             </div>
         </div>
         <div class="col-md-3">
