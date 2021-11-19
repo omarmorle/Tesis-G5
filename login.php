@@ -74,7 +74,7 @@
                                         type="submit" class="btn blue" style="width: 100%;"
                                         value="Iniciar sesión" name="ingresa"></span>
                                 <span style="width:50%; text-align:right;  display: inline-flexbox;"><button class="btn blue" style="width: 100%;" value="Crear cuenta"><a
-                                        class="small-text" href="registro.php">Crear cuenta</a></span>
+                                        class="small-text" href="./registro.php">Crear cuenta</a></span>
                             </div>
                             <div>
                                 <span style="width:48%; text-align:left;  display: inline-flexbox;"><a
