@@ -23,7 +23,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-<title>Unir dos tablas y buscar con PHP & MySQL - BaulPHP</title>
+<title>Buscador</title>
 <!-- Bootstrap core CSS -->
 <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
