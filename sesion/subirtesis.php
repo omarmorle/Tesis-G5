@@ -7,6 +7,7 @@
     $consulta = "SELECT * FROM persona WHERE email = '$email'";
     $resul = mysqli_query($conex, $consulta);
     $filas = mysqli_fetch_row($resul);
+    $rol = $filas[3];
   }
   else
   {
@@ -40,8 +41,14 @@
                 <div class="nav_list"> 
                     <a href="./subirtesis.php" class="nav_link"> <i class='bx bx-upload'></i> <span class="nav_name">Sube Tesis</span> </a> 
                     <a href="./buscador.php" class="nav_link"> <i class='bx bx-search-alt'></i> <span class="nav_name">Buscar Tesis</span> </a> 
-                    <a href="#" class="nav_link"> <i class='bx bxs-book'></i> <span class="nav_name">Ve tus Tesis</span> </a> 
-                    <a href="#" class="nav_link"> <i class='bx bxs-time'></i> <span class="nav_name">Ultimas Tesis</span> </a> 
+                    <a href="./recientes.php" class="nav_link"> <i class='bx bxs-time'></i> <span class="nav_name">Ultimas Tesis</span> </a>
+                    <?php
+                    if($rol == "Alumno")
+                      echo '<a href="alumno.php" class="nav_link"> <i class="bx bxs-contact"></i> <span class="nav_name">Mi Perfil</span> </a>';
+                    else
+                      echo '<a href="ProfesorTesis.php" class="nav_link"> <i class="bx bxs-contact"></i> <span class="nav_name">Mis tesis</span> </a>';
+                    ?>
+                    <a href="./propuestas.php" class="nav_link"> <i class='bx bxs-message-alt-edit'></i> <span class="nav_name">Propuestas</span> </a>    
             </div> <a href="./cerrarSesion.php?nombreSesion=email" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Cerrar sesión</span> </a>
         </nav>
     </div>
@@ -62,6 +69,8 @@
                   <input type="text" class="form-control" name="escuela" placeholder="Escuela de procedencia" required>
                   <label class="control-label">Año de realización</label>
                   <input type="text" class="form-control" name="anio" placeholder="Año de realización" required>
+                  <label class="control-label">Fecha actual</label>
+                  <input type="date" class="form-control" name="fecha" placeholder="Fecha" required>
                   <label class="control-label">Numero de boleta 1</label>
                   <input type="text" class="form-control" name="numeroBoleta1" placeholder="Ingresa el numero de boleta" required>
                   <label class="control-label">Numero de boleta 2</label>
@@ -70,10 +79,31 @@
                   <input type="text" class="form-control" name="numeroBoleta3" placeholder="Ingresa el numero de boleta" >
                   <label class="control-label">Numero de boleta 4</label>
                   <input type="text" class="form-control" name="numeroBoleta4" placeholder="Ingresa el numero de boleta" >
-                  <label class="control-label">Nombre completo del director 1</label>
+                  <label class="control-label">Nombre completo del director 1  (Empezando por apedillo)</label>
                   <input type="text" class="form-control" name="prof1" placeholder="Ingresa el nombre completo" required>
-                  <label class="control-label">Nombre completo del director 2</label>
+                  <label class="control-label">Nombre completo del director 2  (Empezando por apedillo)</label>
                   <input type="text" class="form-control" name="prof2" placeholder="Ingresa el nombre completo" >
+                  <label class="control-label">Introduce la cita de tu tesis en formato IEEE</label>
+                  <input type="text" class="form-control" name="cita" placeholder="Cita IEEE" >
+                  <label class="control-label">Clasificación</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="clasificacion" id="exampleRadios1" value="tesis" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                      Tesis
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="clasificacion" id="exampleRadios2" value="protocolo">
+                    <label class="form-check-label" for="exampleRadios2">
+                      Propuesta de tesis
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="clasificacion" id="exampleRadios3" value="version">
+                    <label class="form-check-label" for="exampleRadios3">
+                      Versión de tesis
+                    </label>
+                  </div>
                   <br>
                   <div class="preview-zone hidden">
               <div class="box box-solid">

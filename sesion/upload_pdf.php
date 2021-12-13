@@ -20,12 +20,25 @@ $titulo = $_POST['titulo'];
 $anio = $_POST['anio'];
 $escuela = $_POST['escuela'];
 $anio = $_POST['anio'];
+$fecha = $_POST['fecha'];
 $numeroBoleta1 = $_POST['numeroBoleta1'];
 $numeroBoleta2 = $_POST['numeroBoleta2'];
 $numeroBoleta3 = $_POST['numeroBoleta3'];
 $numeroBoleta4 = $_POST['numeroBoleta4'];
 $prof1 = $_POST['prof1'];
 $prof2 = $_POST['prof2'];
+$cita = $_POST['cita'];
+$clasificacion = $_POST['clasificacion'];
+
+//checar la clasificacion
+if($clasificacion == "protocolo")
+{
+  $estado = "En revision";
+}
+else
+{
+  $estado = NULL;
+}
 
 $uno = 1;
 
@@ -40,8 +53,12 @@ $pdf_name = $_FILES['documento']['name'];
 //change spaces to underscores
 $pdf_name_new = str_replace(' ', '-', $pdf_name);
 
-//print the name of pdf file
+/* 
+print the name of pdf file
 echo $pdf_name;
+echo "<br>";
+echo $clasificacion;
+*/
 
 if(isset($_FILES['documento']) && $_FILES['documento']['type']=='application/pdf'){
 	move_uploaded_file ($_FILES['documento']['tmp_name'] , '../tesis/'.$_FILES['documento']['name']);
@@ -49,9 +66,10 @@ if(isset($_FILES['documento']) && $_FILES['documento']['type']=='application/pdf
 
 //obtener la direccion actual
 $url = "http://".$_SERVER['HTTP_HOST']."/niws/tesis/".$pdf_name_new;
+//$url = "http://20.124.194.182/niws/tesis/".$pdf_name_new;
 
 //insertar en la tabla tesis
-$consulta = "INSERT INTO tesis(nombre, escuela, anio, boleta1, boleta2, boleta3, boleta4, profe1, profe2, link) VALUES ('$titulo', '$escuela', '$anio', '$numeroBoleta1', '$numeroBoleta2', '$numeroBoleta3', '$numeroBoleta4', '$prof1', '$prof2', '$url')";
+$consulta = "INSERT INTO tesis(nombre, escuela, anio, fecha, boleta1, boleta2, boleta3, boleta4, profe1, profe2, cita, clasificacion, estado, link) VALUES ('$titulo', '$escuela', '$anio', '$fecha', '$numeroBoleta1', '$numeroBoleta2', '$numeroBoleta3', '$numeroBoleta4', '$prof1', '$prof2', '$cita', '$clasificacion', '$estado', '$url')";
 $resultado = mysqli_query($conex,$consulta);
 if ($resultado) {
     //renombrar el archivo subido
@@ -99,7 +117,13 @@ if ($prof2 != "") {
 //mandar alerta de que se subio correctamente la teesis con el titulo $titulo
 echo "<script>alert('Se subio correctamente la tesis con el nombre $pdf_name');</script>";
 
-//redireccionar a la pagina de inicio
-echo '<script>window.location.href="./index.php";</script>';
+//Consultar el id de la tesis que se acaba de subir
+$consulta = "SELECT * FROM tesis WHERE nombre = '$titulo' AND boleta1 = '$numeroBoleta1'";
+$resul = mysqli_query($conex, $consulta);
+$filas = mysqli_fetch_row($resul);
+$id = $filas[0];
+
+//Enviar variable via post
+echo '<script>window.location.href="./pdf.php?id='.$id.'";</script>';
 
 ?>

@@ -7,6 +7,7 @@
         $consulta = "SELECT * FROM persona WHERE email = '$email'";
         $resul = mysqli_query($conex, $consulta);
         $filas = mysqli_fetch_row($resul);
+        $rol = $filas[3];
     }
     else
     {
@@ -47,8 +48,14 @@
                 <div class="nav_list"> 
                     <a href="./subirtesis.php" class="nav_link"> <i class='bx bx-upload'></i> <span class="nav_name">Sube Tesis</span> </a> 
                     <a href="./buscador.php" class="nav_link"> <i class='bx bx-search-alt'></i> <span class="nav_name">Buscar Tesis</span> </a> 
-                    <a href="#" class="nav_link"> <i class='bx bxs-book'></i> <span class="nav_name">Ve tus Tesis</span> </a> 
-                    <a href="#" class="nav_link"> <i class='bx bxs-time'></i> <span class="nav_name">Ultimas Tesis</span> </a> 
+                    <a href="./recientes.php" class="nav_link"> <i class='bx bxs-time'></i> <span class="nav_name">Ultimas Tesis</span> </a>
+                    <?php
+                    if($rol == "Alumno")
+                      echo '<a href="alumno.php" class="nav_link"> <i class="bx bxs-contact"></i> <span class="nav_name">Mi Perfil</span> </a>';
+                    else
+                      echo '<a href="ProfesorTesis.php" class="nav_link"> <i class="bx bxs-contact"></i> <span class="nav_name">Mis tesis</span> </a>';
+                    ?>
+                    <a href="./propuestas.php" class="nav_link"> <i class='bx bxs-message-alt-edit'></i> <span class="nav_name">Propuestas</span> </a>    
             </div> <a href="./cerrarSesion.php?nombreSesion=email" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Cerrar sesión</span> </a>
         </nav>
     </div>
@@ -120,7 +127,7 @@
             <p>
                 Aqui puedes checar las ultimas tesis que se han publicado en la universidad.
             </p>
-            <button class="btn btn-primary btn-lg btn-block" type="button">Vamos</button>
+            <a href="./recientes.php"><button class="btn btn-primary btn-lg btn-block" type="button">Vamos</button></a>
             </div>
         </div>
         </div>
