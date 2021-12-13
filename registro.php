@@ -48,7 +48,7 @@
                     <div class="col">
                         <p>
                             <span class="fa fa-user"></span>
-                            <input type="text" id="nombre" name="nombre" data-validetta="required,minLength[6],maxLength[99]" placeholder="Nombre completo" required>
+                            <input type="text" id="nombre" name="nombre" data-validetta="required,minLength[6],maxLength[99]" placeholder="Ap Paterno, Materno, Nombre" required>
                         </p>
                     </div>
                     <div class="col">
